@@ -1,12 +1,10 @@
 import "./App.css";
-import TodoDisplay from "./components/todoDisplay/todoDisplay.component";
-import Layout from './components/todoDisplay/todoDisplay.component';
-import ToDoForm from "./components/todoForm/todoForm.component";
+import AppForm from "./components/form/form.component";
 
 function App() {
   return (
     <div className="App">
-      <TodoDisplay/>
+      <AppForm/>
     </div>
   );
 }
