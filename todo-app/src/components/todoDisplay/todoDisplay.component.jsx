@@ -1,55 +1,95 @@
 import React, { useState } from "react";
-import { Contanier, Form, Input, Button, Icon,Column, Task,Span} from "./todoDisplay.styles";
-import addIcon from '../../assets/plus.png';
+import {
+  Contanier,
+  Icon,
+  Task,
+  Span,
+  Title,
+  RightColumn,
+  LeftColumn,
+  Column,
+  CompletedTask
+} from "./todoDisplay.styles";
 import Circle from "../../assets/circle.svg";
 import Remove from "../../assets/remove.svg";
 import Done from "../../assets/done.png";
 
-const ToDoDisplay = (props) => {
+const ToDoDisplay = ({ tasks, removeTask, updateStatus, getCompleted }) => {
+  const handleRemoveTask = (taskToRemove) => {
+    removeTask(taskToRemove);
+  };
+  const handleStatus = (taskToUpdate) => {
+    updateStatus(taskToUpdate);
+  };
 
- const { tasks, handleRemove} = props
-
+  const completed = getCompleted();
+  const completedCount = completed.length;
 
   return (
     <>
       <Contanier>
-      {tasks.length
-            ? tasks.map((task) => {
-                return (
-                  <Task key={task.id}>
-                    <Column>
-                      {task.completed ? (
-                        <Icon
-                          onClick={() => {
-                           
-                          }}
-                          src={Done}
-                        />
-                      ) : (
-                        <Icon
-                          onClick={() => {
-                         
-                          }}
-                          src={Circle}
-                        />
-                      )}
+        <Title>Tasks</Title>
+        {tasks.map((task) => {
+          if (!task.completed) {
+            return (
+              <Task key={task.id}>
+                <LeftColumn>
+                  {task.completed ? (
+                    <Icon
+                      onClick={() => {
+                        handleStatus(task);
+                      }}
+                      src={Done}
+                    />
+                  ) : (
+                    <Icon
+                      onClick={() => {
+                        handleStatus(task);
+                      }}
+                      src={Circle}
+                    />
+                  )}
+                </LeftColumn>
 
-                      <Span>{task.task}</Span>
-                    </Column>
-                    <div></div>
-                    <div>
-                      <Icon
-                        onClick={() => {
-                          handleRemove(task);
-                        }}
-                        src={Remove}
-                      />
-                    </div>
-                  </Task>
-                );
-              })
-            : null}
-      </Contanier>
+                <Column>
+                  <Span>{task.name}</Span>
+                </Column>
+
+                <RightColumn>
+                  <Icon
+                    onClick={() => {
+                      handleRemoveTask(task);
+                    }}
+                    src={Remove}
+                  />
+                </RightColumn>
+              </Task>
+            );
+          }
+        })}
+
+<Title>Completed({completedCount})</Title>
+        {completed.map((task) => {
+          return (
+            <Task key={completed.id}>
+              <LeftColumn>
+                <Icon
+                  onClick={() => {
+                    handleStatus(task);
+                  }}
+                  src={Done}
+                />
+              </LeftColumn>
+              <Column>
+                <CompletedTask>{task.name}</CompletedTask>
+              </Column>
+              <RightColumn></RightColumn>
+            </Task>
+          );
+        })}
+            </Contanier>
+  
+  
     </>
   );
 };
