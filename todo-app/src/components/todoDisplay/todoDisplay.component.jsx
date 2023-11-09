@@ -8,16 +8,25 @@ import {
   RightColumn,
   LeftColumn,
   Column,
-  CompletedTask
+  CompletedTask,
 } from "./todoDisplay.styles";
 import Circle from "../../assets/circle.svg";
 import Remove from "../../assets/remove.svg";
 import Done from "../../assets/done.png";
 
 const ToDoDisplay = ({ tasks, removeTask, updateStatus, getCompleted }) => {
+  /**
+   * invokes the a function to remove the selected task from the list
+   * @param {object} taskToRemove
+   */
   const handleRemoveTask = (taskToRemove) => {
     removeTask(taskToRemove);
   };
+
+  /**
+   * invokes a function to update the status of the selected task
+   * @param {object} taskToUpdate
+   */
   const handleStatus = (taskToUpdate) => {
     updateStatus(taskToUpdate);
   };
@@ -34,7 +43,9 @@ const ToDoDisplay = ({ tasks, removeTask, updateStatus, getCompleted }) => {
             return (
               <Task key={task.id}>
                 <LeftColumn>
+  
                   {task.completed ? (
+               
                     <Icon
                       onClick={() => {
                         handleStatus(task);
@@ -68,7 +79,7 @@ const ToDoDisplay = ({ tasks, removeTask, updateStatus, getCompleted }) => {
           }
         })}
 
-<Title>Completed({completedCount})</Title>
+        <Title>Completed({completedCount})</Title>
         {completed.map((task) => {
           return (
             <Task key={completed.id}>
@@ -87,9 +98,7 @@ const ToDoDisplay = ({ tasks, removeTask, updateStatus, getCompleted }) => {
             </Task>
           );
         })}
-            </Contanier>
-  
-  
+      </Contanier>
     </>
   );
 };

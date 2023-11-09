@@ -6,8 +6,11 @@ import { Container, Box } from "./App.styles.jsx";
 
 function App() {
   const [tasks, setTasks] = useState([]);
-  const [completedTasks,setCompletedTasks] = useState([]);
 
+  /**
+   * set the tasks state with the new task
+   * @param {object} newTask
+   */
   const addTask = (newTask) => {
     setTasks([
       ...tasks,
@@ -19,6 +22,10 @@ function App() {
     ]);
   };
 
+  /**
+   * filters and updates the state with the new tasks
+   * @param {object} taskToRemove
+   */
   const removeTask = (taskToRemove) => {
     const newTaskList = tasks.filter((task) => {
       return taskToRemove.id !== task.id;
@@ -26,6 +33,10 @@ function App() {
     setTasks(newTaskList);
   };
 
+  /**
+   * updates the task status to true/false
+   * @param {object} taskToUpdate
+   */
   const updateStatus = (taskToUpdate) => {
     const updatedTasks = tasks.map((task) => {
       if (task.id == taskToUpdate.id) {
@@ -39,12 +50,14 @@ function App() {
     setTasks(updatedTasks);
   };
 
+  /**
+   * gets the array of the completed tasks
+   * @returns {arr}
+   */
   const getCompleted = () => {
     const completedTasks = tasks.filter((task) => {
       if (task.completed) return task;
     });
-
-
     return completedTasks;
   };
 

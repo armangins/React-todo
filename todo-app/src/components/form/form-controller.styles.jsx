@@ -56,7 +56,7 @@ export const Button = styled.button`
   color: white;
   width: 25px;
   height: 25px;
-  background-color: #3b74a9;
+  background-color: ${prop =>prop.faded? '#3b74a9' : '#bec2c6'};
   border-radius: 100%;
   position: absolute;
   right: 10px;
@@ -64,18 +64,15 @@ export const Button = styled.button`
   border: none;
   top: 10px;
   cursor: pointer;
+  text-align: center;
   transform: translateX(2px);
+  transition: background-color 0.5s ease;
 
-  /* top: 82px;
-  right: 25px; */
+
+
   box-shadow: rgba(0, 0, 0, 0.2) 0px 12px 28px 0px,
     rgba(0, 0, 0, 0.1) 0px 2px 4px 0px,
     rgba(255, 255, 255, 0.05) 0px 0px 0px 1px inset;
-
-  /* @media (min-width: 768px) {
-    top: 15.2%;
-    right: 36%;
-  } */
 `;
 
 export const Icon = styled.img`

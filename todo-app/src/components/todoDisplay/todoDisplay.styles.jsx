@@ -65,6 +65,7 @@ export const RightColumn = styled(Column)`
 export const Icon = styled.img`
   width: 20px;
   margin-top: 2px;
+  cursor: pointer;
 `;
 
 export const Span = styled.span`

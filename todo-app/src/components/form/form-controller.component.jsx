@@ -9,15 +9,18 @@ import {
   Button,
 } from "./form-controller.styles";
 
-import addIcon from "../../assets/plus.png";
-
 const FormController = ({ addTask }) => {
-  const [task, setTask] = useState([]);
+  const [task, setTask] = useState('');
   const submitHandler = (e) => {
     e.preventDefault();
-    if (task.trim() == "") return;
-    addTask(task);
-    setTask('');
+    if(task==''){
+      return; 
+    } else{
+      addTask(task);  
+      setTask('');
+    }
+
+   
   };
 
   return (
@@ -28,17 +31,26 @@ const FormController = ({ addTask }) => {
             <Title>Hey, lets begin with you tasks</Title>
           </div>
           <Form onSubmit={submitHandler}>
-            <Input
+            <Input 
               autoComplete="off"
               value={task}
               onChange={(e) => setTask(e.target.value)}
               name="task"
               placeholder="Add task"
             />
-            <Button>
-              +
-              {/* <Icon src={addIcon}></Icon> */}
-            </Button>
+ {
+  task == ''?(
+    <Button >
+    +
+    {/* <Icon src={addIcon}></Icon> */}
+  </Button>
+  ) : (
+    <Button  faded  >
+    +
+    {/* <Icon src={addIcon}></Icon> */}
+  </Button>
+  )
+ }
           </Form>
         </Box>
       </Container>
